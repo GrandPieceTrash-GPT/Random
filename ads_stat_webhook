@@ -1,0 +1,55 @@
+repeat wait() warn("Waiting.") wait(0.5) warn("Waiting..") wait(0.5) warn("Waiting...") wait(0.5) warn("Waiting....") wait(0.5) if game:IsLoaded() then warn("Game Loaded") end until game:IsLoaded()
+wait(10)
+if game.PlaceId == "7274690025" or "6938803436" then
+    username = game:GetService("Players").LocalPlayer.Name
+    Inf_reward_time = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.PlayFrame.Frame.PlayRoomFrame.MapSelectionScrollingFrame["Infinite Mode"].PlayerReq.Text --Inf reward time
+    Boss_rush_free_entry_ticket = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.BossRushFrame.BossRushFreeEntry.Text --Boss rush free entry count
+    Daily_raid_reward_time = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.DailyRaidChallengeFrame.RaidChallengeRewardAvailable.Text --Daily raid reward time
+    Speed_raid_open_time = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.PlayButtonsFrame.Frame.SpeedRaidBanner.SpeedRaidBannerOpenText.Text --Speed raid open time
+    Raid_open_time = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.PlayButtonsFrame.Frame.RaidBanner.RaidBannerOpenText.Text --Raid open time
+    Exp_progress = game:GetService("Players").LocalPlayer.PlayerGui.UniversalGui.LeftUIFrame.OwnHealthBarFrame.Exp.Text --Exp progress
+    Speed_raid_token = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.RaidShop.SpeedRaidShopUIHolder.SpeedRaidShopCurrencyCounter.SpeedRaidShopCurrencyAmount.Text --Speed raid token
+    Speed_raid_completion = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.SpeedRaidFrame.SpeedRaidCompletionsText.Text --Speed raid completion
+    Pet_owned = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.Inventory.Frame.PetsOwned.Text --Pet owned
+    Fruit_owned = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.Inventory.Frame.FruitsOwned.Text --Fruit owned
+    Card_owned = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.Inventory.Frame.CardsOwned.Text --Card owned
+    Trait_token = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.CharacterTraitFrame.Frame.TraitGearChangeTrait.Text --Trait token
+    Boss_rush_ticket = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushTicketCounter.BossRushTicketCurrencyAmount.Text --Boss rush ticket
+    Boss_rush_token = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushShopCurrencyCounter.BossRushShopCurrencyAmount.Text --Boss rush token
+    Raid_Token = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushRaidCounter.BossRushRaidCurrencyAmount.Text --Raid token
+    Gem = game:GetService("Players").LocalPlayer.PlayerGui.MainGui.CenterUIFrame.BossRushShop.BossRushGemCounter.BossRushGemAmount.Text --Gem
+    Level = game:GetService("Players").LocalPlayer.leaderstats.Level.Value
+    local currentTime = os.date("%H:%M:%S")  -- Format: Hours:Minutes:Seconds
+    local currentDate = os.date("%m-%d-%Y")  -- Format: Year-Month-Day
+    local timeanddate = "**at:** "..currentTime.." **date:** "..currentDate
+
+    if Inf_reward_time == "" then
+        Inf_reward_time = "Reward ready to claim!"
+    end
+    local url = _G.WebhookLink
+    local data = {
+    ["content"] = "",
+
+    ["embeds"] = {
+        {
+            ["title"] = "Username: ".."||"..username.."||",
+            ["description"] = "**---------Player Info---------**".."\n".."**Level:** "..Level.."\n".."**Exp Progression:** "..Exp_progress.."\n".."**Card Owned:** "..Card_owned.."\n".."**Fruit Owned:** "..Fruit_owned.."\n".."**Pet Owned:** "..Pet_owned.."\n".."**Speed** "..Speed_raid_completion.."\n".."**---------Currency Info---------**".."\n".."**Gem:** "..Gem.."\n".."**Raid Token:** "..Raid_Token.."\n".."**Boss Rush Token:** "..Boss_rush_token.."\n".."**Trait Token:** "..Trait_token.."\n".."**Speed Raid Token:** "..Speed_raid_token.."\n".."**Boss Rush Ticket:** "..Boss_rush_ticket.."\n".."**---------Hourly Info---------**".."\n".."**Raid:** "..Raid_open_time.."\n".."**Speed Raid:** "..Speed_raid_open_time.."\n".."**---------Daily Info---------**".."\n".."**Boss Rush Free Entry:** "..Boss_rush_free_entry_ticket.."\n".."**Daily Raid Reward:** "..Daily_raid_reward_time.."\n".."**Infinite Mode Reward:** "..Inf_reward_time.."\n**--------------------------------------------**\n"..timeanddate,
+            ["type"] = "rich",
+            ["color"] = tonumber("FF9AD6", 16),
+            ["image"] = {
+                ["url"] = ""
+            }
+        }
+    }
+    }
+    local newdata = game:GetService("HttpService"):JSONEncode(data)
+
+    local headers = {
+    ["content-type"] = "application/json"
+    }
+    request = http_request or request or HttpPost or syn.request
+    local abcdef = {Url = url, Body = newdata, Method = "POST", Headers = headers}
+    request(abcdef)
+
+else print("Not in Lobby!")
+end
